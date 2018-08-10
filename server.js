@@ -11,17 +11,8 @@ const io = require('socket.io')(http);
 io.on('connection', socket => {
   console.log('New client connected');
 
-  let interval;
-  if (interval) {
-    clearInterval(interval);
-  }
-  // interval = setInterval(() => getNYTArticles(socket), 10000);
- // interval = setInterval(() => 'response from server listening', 10000);
-  socket.on('ARTICLE_SAVED', (data) => io.emit('REPLY_SAVED', data));
-
-  socket.on('disconnect',  () => {
-    console.log('Client disconnected');
-  })
+  socket.on('REQUEST_CREATE', (data) => io.emit('REPLY_CREATE', data));
+  socket.on('disconnect',  () => {console.log('Client disconnected')});
 });
 
 /**
@@ -69,4 +60,5 @@ const getNYTArticles = async socket => {
   }
 };
 
-app.listen(PORT, ()  => console.log(`🌎 ==> Server now on port ${PORT}!`));
+//why http?
+http.listen(PORT, ()  => console.log(`🌎 ==> Server now on port ${PORT}!`));

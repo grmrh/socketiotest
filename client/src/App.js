@@ -10,9 +10,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = io(this.endpoint);
-    socket.on("ARTICLE_SAVED", data => this.setState({ response: data }));
-    socket.emit('ARTICLE_SAVED', 'Client fired');
+    const socket = io(this.state.endpoint);
+    socket.on("REPLY_CREATE", data => this.setState({ response: data }));
+    socket.emit('REQUEST_CREATE', 'Client fired');
   }
 
   render() {
@@ -23,9 +23,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to Socket.IO with React</h1>
         </header>
         <div style={{textAlign: "center"}}>
-          {this.response 
+          {this.state.response 
             ? <p className="App-intro">
-                  The top article from NYT is: {this.response}
+                Server response is: {this.state.response}
               </p>
             : <p>Loading...</p>
            }
