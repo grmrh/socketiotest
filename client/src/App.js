@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from '../src/components/modal';
 import io from 'socket.io-client';
 import logo from './logo.svg';
 import './App.css';
@@ -30,6 +31,7 @@ class App extends Component {
             : <p>Loading...</p>
            }
         </div>
+        <Modal />
       </div>
     );
   }
